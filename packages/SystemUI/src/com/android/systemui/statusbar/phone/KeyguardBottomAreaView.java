@@ -63,6 +63,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.util.evolution.fod.FodUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
@@ -169,6 +170,12 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     private int mBurnInXOffset;
     private int mBurnInYOffset;
     private ActivityIntentHelper mActivityIntentHelper;
+<<<<<<< HEAD
+=======
+    //Omni
+    private boolean mIsPowerCameraGesture;
+    private String mPreviousSource;
+>>>>>>> 5e1e5df3dbc... fwb: SystemUI: Use FODUtils for FOD config checking [1/3]
 
     public KeyguardBottomAreaView(Context context) {
         this(context, null);
@@ -390,11 +397,27 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     private void updateLeftAffordanceIcon() {
         IconState state = mLeftButton.getIcon();
         mLeftAffordanceView.setVisibility(!mDozing && state.isVisible ? View.VISIBLE : View.GONE);
+<<<<<<< HEAD
         if (state.drawable != mLeftAffordanceView.getDrawable()
                 || state.tint != mLeftAffordanceView.shouldTint()) {
             mLeftAffordanceView.setImageDrawable(state.drawable, state.tint);
         }
         mLeftAffordanceView.setContentDescription(state.contentDescription);
+=======
+        if (state.isVisible) {
+            if (state.drawable != mLeftAffordanceView.getDrawable()
+                    || state.tint != mLeftAffordanceView.shouldTint()
+                    || !state.isDefaultButton) {
+                mLeftAffordanceView.setImageDrawable(state.drawable, state.tint,
+                    state.isDefaultButton ? false : true);
+            }
+            mLeftAffordanceView.setContentDescription(state.contentDescription);
+	}
+    }
+
+    private boolean hasInDisplayFingerprint() {
+        return FodUtils.hasFodSupport(mContext) && mIsFingerprintRunning;
+>>>>>>> 5e1e5df3dbc... fwb: SystemUI: Use FODUtils for FOD config checking [1/3]
     }
 
     public boolean isLeftVoiceAssist() {

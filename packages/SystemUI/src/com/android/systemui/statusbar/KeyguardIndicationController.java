@@ -44,6 +44,7 @@ import android.view.ViewGroup;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.util.evolution.fod.FodUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.ViewClippingUtil;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -474,6 +475,16 @@ public class KeyguardIndicationController implements StateListener,
         }
     }
 
+<<<<<<< HEAD
+=======
+    private boolean hasActiveInDisplayFp() {
+        boolean hasInDisplayFingerprint = FodUtils.hasFodSupport(mContext);
+        int userId = KeyguardUpdateMonitor.getCurrentUser();
+        FingerprintManager fpm = (FingerprintManager) mContext.getSystemService(Context.FINGERPRINT_SERVICE);
+        return hasInDisplayFingerprint && fpm.getEnrolledFingerprints(userId).size() > 0;
+    }
+
+>>>>>>> 5e1e5df3dbc... fwb: SystemUI: Use FODUtils for FOD config checking [1/3]
     // animates textView - textView moves up and bounces down
     private void animateText(KeyguardIndicationTextView textView, String indication) {
         int yTranslation = mContext.getResources().getInteger(
