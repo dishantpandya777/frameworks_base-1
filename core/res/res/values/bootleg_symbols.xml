@@ -134,6 +134,7 @@
     <java-symbol type="string" name="gaming_mode_enabled_toast" />
     <java-symbol type="string" name="gaming_mode_disabled_toast" />
 
+<<<<<<< HEAD
   <!-- Clipboard access toast -->
   <java-symbol type="string" name="app_clipboard_access_denied" />
   <java-symbol type="string" name="app_clipboard_access_granted" />
@@ -174,4 +175,8 @@
     <java-symbol type="array" name="config_displayModeMappings" />
     <java-symbol type="bool" name="config_liveDisplayAvailable" />
 
+=======
+    <!-- String to show toast message on clipboard -->
+    <java-symbol type="string" name="clipboard_in_use_toast" />
+>>>>>>> 854bab28798... base: iOS-like toast notification for clipboard access
 </resources>

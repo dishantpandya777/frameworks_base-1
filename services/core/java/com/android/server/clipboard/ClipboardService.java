@@ -793,6 +793,7 @@ public class ClipboardService extends SystemService {
 
     private boolean clipboardAccessAllowed(int op, String callingPackage, int uid,
             @UserIdInt int userId) {
+<<<<<<< HEAD
         Context context = getContext();
         String applicationName = "(unknown)";
         mToastMessage = "";
@@ -808,6 +809,30 @@ public class ClipboardService extends SystemService {
             }
         }
 
+=======
+
+        boolean showClipboardToast = Settings.Secure.getIntForUser(getContext().getContentResolver(),
+                Settings.Secure.SHOW_CLIPBOARD_TOAST, 0, userId) == 1;
+        if (showClipboardToast) {
+	        // create toast that app has tried to access clipboard
+	        final PackageManager pm = getContext().getPackageManager();
+	        ApplicationInfo ai;
+	        try {
+	            ai = pm.getApplicationInfo(callingPackage, 0);
+	        } catch (final NameNotFoundException e) {
+	            ai = null;
+	        }
+	        final String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
+	        Handler handler = new Handler(Looper.getMainLooper());
+	        handler.post(new Runnable() {
+	            @Override
+	            public void run() {
+	                Toast.makeText(getContext(),getContext().getString(
+                        com.android.internal.R.string.clipboard_in_use_toast, applicationName), Toast.LENGTH_SHORT).show();
+	            }
+	        });
+        }
+>>>>>>> 854bab28798... base: iOS-like toast notification for clipboard access
         // Check the AppOp.
         if (mAppOps.noteOp(op, uid, callingPackage) != AppOpsManager.MODE_ALLOWED) {
             if (mShouldToast > 0) {

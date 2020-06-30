@@ -10804,6 +10804,7 @@ public final class Settings {
         private static final Validator ADVANCED_REBOOT_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+<<<<<<< HEAD
          * Whether tethering is allowed to use VPN upstreams
          * 0 = false, 1 = true
          * @hide
@@ -10812,6 +10813,12 @@ public final class Settings {
 
         /** @hide */
         public static final Validator TETHERING_ALLOW_VPN_UPSTREAMS_VALIDATOR = BOOLEAN_VALIDATOR;
+=======
+         * Setting to whether display a toast when any app
+         * tries to access the device clipboard
+         */
+        public static final String SHOW_CLIPBOARD_TOAST = "show_clipboard_toast";
+>>>>>>> 854bab28798... base: iOS-like toast notification for clipboard access
 
         /**
          * This are the settings to be backed up.
@@ -11191,6 +11198,7 @@ public final class Settings {
             CLONE_TO_MANAGED_PROFILE.add(LOCATION_MODE);
             CLONE_TO_MANAGED_PROFILE.add(LOCATION_PROVIDERS_ALLOWED);
             CLONE_TO_MANAGED_PROFILE.add(SHOW_IME_WITH_HARD_KEYBOARD);
+            CLONE_TO_MANAGED_PROFILE.add(SHOW_CLIPBOARD_TOAST);
             if (!InputMethodSystemProperty.PER_PROFILE_IME_ENABLED) {
                 CLONE_TO_MANAGED_PROFILE.add(DEFAULT_INPUT_METHOD);
                 CLONE_TO_MANAGED_PROFILE.add(ENABLED_INPUT_METHODS);
@@ -11230,6 +11238,7 @@ public final class Settings {
             INSTANT_APP_SETTINGS.add(ACCESSIBILITY_AUTOCLICK_ENABLED);
             INSTANT_APP_SETTINGS.add(ACCESSIBILITY_LARGE_POINTER_ICON);
 
+            INSTANT_APP_SETTINGS.add(SHOW_CLIPBOARD_TOAST);
             INSTANT_APP_SETTINGS.add(DEFAULT_INPUT_METHOD);
             INSTANT_APP_SETTINGS.add(ENABLED_INPUT_METHODS);
 

@@ -45,6 +45,7 @@
     <string name="gaming_mode_enabled_toast">Gaming mode turned on</string>
     <string name="gaming_mode_disabled_toast">Gaming mode turned off</string>
 
+<<<<<<< HEAD
     <!-- Clipboard access toast -->
     <string name="app_clipboard_access_denied">%1$s was denied access to the clipboard</string>
     <string name="app_clipboard_access_granted">%1$s was granted access to the clipboard</string>
@@ -84,4 +85,8 @@
     <string name="permgrouprequest_fake_package_signature">Allow
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to spoof package signature?</string>
 
+=======
+    <!-- String to show toast message on clipboard -->
+    <string name="clipboard_in_use_toast">%s tried to access the clipboard</string>
+>>>>>>> 854bab28798... base: iOS-like toast notification for clipboard access
 </resources>
