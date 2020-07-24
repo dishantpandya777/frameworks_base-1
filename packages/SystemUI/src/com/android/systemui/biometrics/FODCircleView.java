@@ -52,16 +52,16 @@ import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.tuner.TunerService;
+
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreen;
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreenCallback;
 import java.util.NoSuchElementException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class FODCircleView extends ImageView implements TunerService.Tunable {
+    public class FODCircleView extends ImageView implements TunerService.Tunable {
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
     private static final String FOD_GESTURE = "system:" + Settings.System.FOD_GESTURE;
-    
     private final int mPositionX;
     private final int mPositionY;
     private final int mSize;
@@ -215,9 +215,7 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
 
         @Override
         public void onScreenTurnedOn() {
-            if (mUpdateMonitor.isFingerprintDetectionRunning()) {
-                show();
-            }
+
             if (mUpdateMonitor.isFingerprintDetectionRunning() && !mFodGestureEnable) {
                 show();
             }

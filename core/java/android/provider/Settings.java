@@ -10804,21 +10804,17 @@ public final class Settings {
         private static final Validator ADVANCED_REBOOT_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
-<<<<<<< HEAD
          * Whether tethering is allowed to use VPN upstreams
          * 0 = false, 1 = true
          * @hide
          */
         public static final String TETHERING_ALLOW_VPN_UPSTREAMS = "tethering_allow_vpn_upstreams";
-
-        /** @hide */
+        /** @hide 
         public static final Validator TETHERING_ALLOW_VPN_UPSTREAMS_VALIDATOR = BOOLEAN_VALIDATOR;
-=======
          * Setting to whether display a toast when any app
          * tries to access the device clipboard
          */
         public static final String SHOW_CLIPBOARD_TOAST = "show_clipboard_toast";
->>>>>>> 854bab28798... base: iOS-like toast notification for clipboard access
 
         /**
          * This are the settings to be backed up.
@@ -11164,7 +11160,6 @@ public final class Settings {
             VALIDATORS.put(TAP_GESTURE, TAP_GESTURE_VALIDATOR);
             VALIDATORS.put(ADVANCED_REBOOT, ADVANCED_REBOOT_VALIDATOR);
             VALIDATORS.put(VOLUME_LINK_NOTIFICATION, VOLUME_LINK_NOTIFICATION_VALIDATOR);
-            VALIDATORS.put(TETHERING_ALLOW_VPN_UPSTREAMS, TETHERING_ALLOW_VPN_UPSTREAMS_VALIDATOR);
         }
 
         /**

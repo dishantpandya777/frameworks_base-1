@@ -792,25 +792,7 @@ public class ClipboardService extends SystemService {
     };
 
     private boolean clipboardAccessAllowed(int op, String callingPackage, int uid,
-            @UserIdInt int userId) {
-<<<<<<< HEAD
-        Context context = getContext();
-        String applicationName = "(unknown)";
-        mToastMessage = "";
-
-        if (mShouldToast > 0) {
-            final PackageManager pm = context.getPackageManager();
-            ApplicationInfo ai = null;
-            try {
-                ai = pm.getApplicationInfo(callingPackage, 0);
-                if (ai != null) applicationName = pm.getApplicationLabel(ai).toString();
-            } catch (final NameNotFoundException e) {
-                // Do nothing
-            }
-        }
-
-=======
-
+            @UserIdInt int userId) {	
         boolean showClipboardToast = Settings.Secure.getIntForUser(getContext().getContentResolver(),
                 Settings.Secure.SHOW_CLIPBOARD_TOAST, 0, userId) == 1;
         if (showClipboardToast) {
@@ -832,41 +814,24 @@ public class ClipboardService extends SystemService {
 	            }
 	        });
         }
->>>>>>> 854bab28798... base: iOS-like toast notification for clipboard access
-        // Check the AppOp.
+                // Check the AppOp.
         if (mAppOps.noteOp(op, uid, callingPackage) != AppOpsManager.MODE_ALLOWED) {
-            if (mShouldToast > 0) {
-                mToastMessage = String.format(context.getResources().getString(com.android.internal.R.string.app_clipboard_access_denied),
-                    applicationName);
-                mHandler.post(mRunnable);
-            }
             return false;
         }
         // Shell can access the clipboard for testing purposes.
         if (mPm.checkPermission(android.Manifest.permission.READ_CLIPBOARD_IN_BACKGROUND,
                     callingPackage) == PackageManager.PERMISSION_GRANTED) {
-            if (mShouldToast > 1) {
-                mToastMessage = String.format(context.getResources().getString(com.android.internal.R.string.app_clipboard_access_granted),
-                    applicationName);
-                mHandler.post(mRunnable);
-            }
             return true;
         }
         // The default IME is always allowed to access the clipboard.
-        String defaultIme = Settings.Secure.getStringForUser(context.getContentResolver(),
+        String defaultIme = Settings.Secure.getStringForUser(getContext().getContentResolver(),
                 Settings.Secure.DEFAULT_INPUT_METHOD, userId);
         if (!TextUtils.isEmpty(defaultIme)) {
             final String imePkg = ComponentName.unflattenFromString(defaultIme).getPackageName();
             if (imePkg.equals(callingPackage)) {
-                if (mShouldToast > 1) {
-                    mToastMessage = String.format(context.getResources().getString(com.android.internal.R.string.app_clipboard_access_granted),
-                        applicationName);
-                    mHandler.post(mRunnable);
-                }
                 return true;
             }
         }
-
         switch (op) {
             case AppOpsManager.OP_READ_CLIPBOARD:
                 // Clipboard can only be read by applications with focus..
@@ -899,26 +864,13 @@ public class ClipboardService extends SystemService {
                             + ", application is not in focus neither is a system service for "
                             + "user " + userId);
                 }
-                if (mShouldToast > 0 && allowed) {
-                    mToastMessage = String.format(context.getResources().getString(com.android.internal.R.string.app_clipboard_access_granted),
-                        applicationName);
-                    mHandler.post(mRunnable);
-                } else if (mShouldToast > 0 && !allowed) {
-                    mToastMessage = String.format(context.getResources().getString(com.android.internal.R.string.app_clipboard_access_denied),
-                        applicationName);
-                    mHandler.post(mRunnable);
-                }
                 return allowed;
             case AppOpsManager.OP_WRITE_CLIPBOARD:
                 // Writing is allowed without focus.
-                if (mShouldToast > 0) {
-                    mToastMessage = String.format(context.getResources().getString(com.android.internal.R.string.app_clipboard_access_granted),
-                        applicationName);
-                    mHandler.post(mRunnable);
-                }
                 return true;
             default:
                 throw new IllegalArgumentException("Unknown clipboard appop " + op);
         }
     }
 }
+
