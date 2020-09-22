@@ -51,30 +51,17 @@ import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
-<<<<<<< HEAD
-import com.android.systemui.Dependency;
-import com.android.systemui.statusbar.policy.ConfigurationController;
-import com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener;
-=======
 import com.android.systemui.tuner.TunerService;
-
->>>>>>> b141342e3d6... fwb: Add screen off fod [1/2]
-
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreen;
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreenCallback;
-
 import java.util.NoSuchElementException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-<<<<<<< HEAD
-public class FODCircleView extends ImageView implements ConfigurationListener {
-=======
 public class FODCircleView extends ImageView implements TunerService.Tunable {
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
     private static final String FOD_GESTURE = "system:" + Settings.System.FOD_GESTURE;
-
->>>>>>> b141342e3d6... fwb: Add screen off fod [1/2]
+    
     private final int mPositionX;
     private final int mPositionY;
     private final int mSize;
@@ -112,9 +99,6 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
     private PowerManager.WakeLock mWakeLock;
 
     private Handler mHandler;
-
-    private PowerManager mPowerManager;
-    private PowerManager.WakeLock mWakeLock;
 
     private final ImageView mPressedView;
 
@@ -221,25 +205,19 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
 
         @Override
         public void onScreenTurnedOff() {
-<<<<<<< HEAD
-            hide();
-=======
             mScreenTurnedOn = false;
             if (!mFodGestureEnable) {
                 hide();
             } else {
                 hideCircle();
             }
->>>>>>> b141342e3d6... fwb: Add screen off fod [1/2]
         }
 
         @Override
         public void onScreenTurnedOn() {
-<<<<<<< HEAD
             if (mUpdateMonitor.isFingerprintDetectionRunning()) {
                 show();
             }
-=======
             if (mUpdateMonitor.isFingerprintDetectionRunning() && !mFodGestureEnable) {
                 show();
             }
@@ -249,7 +227,6 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
                 mPressPending = false;
             }
             mScreenTurnedOn = true;
->>>>>>> b141342e3d6... fwb: Add screen off fod [1/2]
         }
     };
 
@@ -332,13 +309,7 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         mUpdateMonitor.registerCallback(mMonitorCallback);
 
-        updateCutoutFlags();
-
-        Dependency.get(ConfigurationController.class).addCallback(this);
-        mPowerManager = context.getSystemService(PowerManager.class);
-        mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                FODCircleView.class.getSimpleName());
-
+        
         mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
 
         setImageResource(R.drawable.fod_icon_default);
@@ -496,18 +467,10 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
     }
 
     public void show() {
-<<<<<<< HEAD
-        if (!mUpdateMonitor.isScreenOn()) {
-            // Keyguard is shown just after screen turning off
-            return;
-        }
-
-=======
         if (!mUpdateMonitor.isScreenOn() && !mFodGestureEnable) {
             // Keyguard is shown just after screen turning off
             return;
         }
->>>>>>> b141342e3d6... fwb: Add screen off fod [1/2]
         if (mIsBouncer && !isPinOrPattern(mUpdateMonitor.getCurrentUser())) {
             // Ignore show calls when Keyguard password screen is being shown
             return;
@@ -656,20 +619,4 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
             mHandler.post(() -> updatePosition());
         }
     };
-
-    @Override
-    public void onOverlayChanged() {
-        updateCutoutFlags();
-    }
-
-    private void updateCutoutFlags() {
-        mStatusbarHeight = getContext().getResources().getDimensionPixelSize(
-                com.android.internal.R.dimen.status_bar_height_portrait);
-        boolean cutoutMasked = getContext().getResources().getBoolean(
-                com.android.internal.R.bool.config_maskMainBuiltInDisplayCutout);
-        if (mCutoutMasked != cutoutMasked){
-            mCutoutMasked = cutoutMasked;
-            updatePosition();
-        }
-    }
 }
