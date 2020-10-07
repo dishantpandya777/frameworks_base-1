@@ -390,7 +390,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         updateLeftAffordanceIcon();
     }
 
-    private void updateLeftAffordanceIcon() {
+      private void updateLeftAffordanceIcon() {
         IconState state = mLeftButton.getIcon();
         mLeftAffordanceView.setVisibility(!mDozing && state.isVisible ? View.VISIBLE : View.GONE);
         if (state.drawable != mLeftAffordanceView.getDrawable()
@@ -398,19 +398,6 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
             mLeftAffordanceView.setImageDrawable(state.drawable, state.tint);
         }
         mLeftAffordanceView.setContentDescription(state.contentDescription);
-        if (state.isVisible) {
-            if (state.drawable != mLeftAffordanceView.getDrawable()
-                    || state.tint != mLeftAffordanceView.shouldTint()
-                    || !state.isDefaultButton) {
-                mLeftAffordanceView.setImageDrawable(state.drawable, state.tint,
-                    state.isDefaultButton ? false : true);
-            }
-            mLeftAffordanceView.setContentDescription(state.contentDescription);
-	}
-    }
-
-    private boolean hasInDisplayFingerprint() {
-        return FodUtils.hasFodSupport(mContext) && mIsFingerprintRunning;
     }
 
     public boolean isLeftVoiceAssist() {
