@@ -22,15 +22,10 @@ import android.view.View;
 import com.android.systemui.SystemUI;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.CommandQueue.Callbacks;
-
-<<<<<<< HEAD
-=======
-import com.android.internal.util.custom.fod.FodScreenOffHandler;
-import com.android.internal.util.evolution.fod.FodUtils;
-
+//import com.android.internal.util.custom.fod.FodScreenOffHandler;
+import com.android.internal.util.bootleggers.fod.FodUtils;
 import dalvik.system.PathClassLoader;
 import java.lang.reflect.Constructor;
->>>>>>> 5e1e5df3dbc... fwb: SystemUI: Use FODUtils for FOD config checking [1/3]
 
 public class FODCircleViewImpl extends SystemUI implements CommandQueue.Callbacks {
     private static final String TAG = "FODCircleViewImpl";
