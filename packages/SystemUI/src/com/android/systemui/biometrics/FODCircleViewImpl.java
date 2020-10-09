@@ -22,8 +22,6 @@ import android.view.View;
 import com.android.systemui.SystemUI;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.CommandQueue.Callbacks;
-//import com.android.internal.util.custom.fod.FodScreenOffHandler;
-import com.android.internal.util.bootleggers.fod.FodUtils;
 import dalvik.system.PathClassLoader;
 import java.lang.reflect.Constructor;
 
@@ -34,9 +32,7 @@ public class FODCircleViewImpl extends SystemUI implements CommandQueue.Callback
 
     @Override
     public void start() {
-        PackageManager packageManager = mContext.getPackageManager();
-        if (!packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT) ||
-                !FodUtils.hasFodSupport(mContext)) {
+        if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
             return;
         }
         getComponent(CommandQueue.class).addCallback(this);
